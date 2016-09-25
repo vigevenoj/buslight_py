@@ -1,0 +1,4 @@
+APScheduler=3.2.0
+phue==0.8
+PyYAML==3.11
+requests==2.11.1
