@@ -13,7 +13,7 @@ from phue import Bridge
 
 class BusLight():
     """
-    Create an empty module with its etup script and a README file.
+    Use upcoming Trimet arrivals to update the status of a lamp.
     """
     def __init__(self, config='./trimet.yaml'):
         try:
@@ -32,10 +32,12 @@ class BusLight():
         self.light = self.bridge.get_light(self.lightid)
 
     def schedule_next_check(self, check_time):
+        """This schedules the next check at check_time"""
         self.scheduler.add_job(self.check_for_bus, 'date', run_date=check_time)
         pass
 
     def check_for_bus(self):
+        """Check for upcoming arrivals at the configured Trimet stops"""
         url = "https://developer.trimet.org/ws/v2/arrivals?json=true&appID={0}&locIDs={1}"
         url = url.format(self.appID, ','.join(self.stops))
         print(url)
@@ -71,6 +73,7 @@ class BusLight():
             self.schedule_next_check(now + timedelta(seconds=60))
 
     def update_status(self, soonest_bus):
+        """Update the configured lamp to the state that soonest_bus suggests"""
         print("we would update the lamp light and such now")
         if soonest_bus >= (15*60*1000):
             print("Light off! No bus for at least 15 minutes")
