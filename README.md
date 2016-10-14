@@ -18,3 +18,7 @@ next arrival to *any* of the configured stops, and will then schedule the next
 time it will make a request to TriMet for arrivals data. 
 
 Script does not terminate by itself, so it will keep running until stopped.
+
+
+For a ruby version, see
+https://github.com/vigevenoj/scripts/blob/master/bus_light.rb
